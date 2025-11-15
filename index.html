@@ -1,59 +1,175 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <title>Phân Tích Video AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Phân Tích Video AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- BOOTSTRAP CSS (giao diện y như trang anh gửi) -->
-  <link rel="stylesheet" href="bootstrap.min.css">
-
-  <!-- CSS TÙY CHỈNH (anh tải từ all.min.css trang gốc) -->
-  <link rel="stylesheet" href="all.min.css">
-
-  <style>
-    body {
-      background: #f5f7fb;
-      font-family: "Segoe UI", sans-serif;
+    <!-- Importmap: React + Google GenAI SDK -->
+    <script type="importmap">
+    {
+      "imports": {
+        "react/": "https://aistudiocdn.com/react@^19.1.1/",
+        "react": "https://aistudiocdn.com/react@^19.1.1",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+        "@google/genai": "https://aistudiocdn.com/@google/genai@^1.17.0"
+      }
     }
+    </script>
 
-    .container-main {
-      max-width: 720px;
-      margin: auto;
-      padding-top: 30px;
-    }
+    <!-- CSS “giả Tailwind” cho layout Tsoft -->
+    <style>
+      /* reset nhẹ */
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background-color: #111827;
+        color: #e5e7eb;
+      }
 
-    .card-custom {
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 4px 20px rgba(0,0,0,.05);
-      background: white;
-    }
-  </style>
+      /* container */
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
 
-  <!-- IMPORTMAP: React + Google GenAI -->
-  <script type="importmap">
-  {
-    "imports": {
-      "react/": "https://aistudiocdn.com/react@^19.1.1/",
-      "react": "https://aistudiocdn.com/react@^19.1.1",
-      "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-      "@google/genai": "https://aistudiocdn.com/@google/genai@^1.17.0"
-    }
-  }
-  </script>
-</head>
+      /* header */
+      header {
+        background-color: #111827;
+        border-bottom: 1px solid #374151;
+      }
+      .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+      .border-dark-border { border-color: #374151; }
 
-<body>
+      .flex { display: flex; }
+      .flex-col { flex-direction: column; }
+      .items-center { align-items: center; }
+      .items-end { align-items: flex-end; }
+      .justify-center { justify-content: center; }
+      .gap-6 { gap: 1.5rem; }
+      .gap-8 { gap: 2rem; }
 
-  <div id="root">
-    <div class="container-main">
-      <div class="card-custom text-center">
-        <h3>Đang tải ứng dụng Phân Tích Video AI...</h3>
-      </div>
+      nav button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border: none;
+        background: none;
+        color: #9ca3af;
+        font: inherit;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        transition: color .2s;
+      }
+      nav button:hover { color: #ffffff; }
+
+      /* text utilities */
+      .text-center { text-align: center; }
+      .text-lg { font-size: 1.125rem; }
+      .text-xl { font-size: 1.25rem; }
+      .text-2xl { font-size: 1.5rem; }
+      .text-3xl { font-size: 1.875rem; }
+      .text-4xl { font-size: 2.25rem; }
+
+      .font-semibold { font-weight: 600; }
+      .font-bold { font-weight: 700; }
+      .font-extrabold { font-weight: 800; }
+      .leading-tight { line-height: 1.2; }
+      .leading-relaxed { line-height: 1.6; }
+
+      .text-dark-text-secondary { color: #9ca3af; }
+      .text-brand-light-purple { color: #8b5cf6; }
+
+      /* spacing */
+      .mt-16 { margin-top: 4rem; }
+      .mt-24 { margin-top: 6rem; }
+      .mb-4 { margin-bottom: 1rem; }
+      .mb-6 { margin-bottom: 1.5rem; }
+      .mb-8 { margin-bottom: 2rem; }
+      .mb-10 { margin-bottom: 2.5rem; }
+      .mb-12 { margin-bottom: 3rem; }
+
+      .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+
+      /* grid / card */
+      .grid { display: grid; }
+      .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+      .gap-8 { gap: 2rem; }
+
+      @media (min-width: 768px) {
+        .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (min-width: 1024px) {
+        .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      }
+
+      .bg-dark-card { background-color: #1f2937; }
+      .border { border: 1px solid #374151; }
+      .rounded-xl { border-radius: 0.75rem; }
+      .p-8 { padding: 2rem; }
+
+      .group { position: relative; }
+      .cursor-pointer { cursor: pointer; }
+      .h-full { height: 100%; }
+      .flex-1 { flex: 1 1 0%; }
+
+      .group.bg-dark-card:hover {
+        border-color: #8b5cf6;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      }
+
+      /* icon size (sửa vụ icon khổng lồ) */
+      .h-6 { height: 1.5rem; }
+      .w-6 { width: 1.5rem; }
+      .h-8 { height: 2rem; }
+      .w-8 { width: 2rem; }
+      .h-12 { height: 3rem; }
+      .w-12 { width: 3rem; }
+
+      svg.h-6, svg.h-8, svg.h-12 {
+        height: inherit;
+        width: inherit;
+      }
+
+      /* countdown box */
+      .bg-dark-card\/50 { background-color: rgba(31,41,55,0.5); }
+      .rounded-lg { border-radius: 0.5rem; }
+      .max-w-xl { max-width: 36rem; }
+      .mx-auto { margin-left: auto; margin-right: auto; }
+      .p-4 { padding: 1rem; }
+      .text-3xl { font-size: 1.875rem; }
+
+      /* footer */
+      footer {
+        border-top: 1px solid #374151;
+        padding: 1rem 0;
+        text-align: center;
+        color: #9ca3af;
+        font-size: 0.875rem;
+        margin-top: 2rem;
+      }
+
+      /* loading text mặc định */
+      #root > div {
+        font-size: 1rem;
+        color: #9ca3af;
+        text-align: center;
+        padding: 1.5rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- React sẽ render toàn bộ app vào đây -->
+    <div id="root">
+      <div>Đang tải ứng dụng Phân Tích Video AI...</div>
     </div>
-  </div>
 
-  <script type="module" src="./index-Dg0lys3F.js"></script>
-</body>
+    <!-- Bundle React đã build sẵn -->
+    <script type="module" src="./index-Dg0lys3F.js"></script>
+  </body>
 </html>
