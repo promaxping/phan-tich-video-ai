@@ -5,8 +5,8 @@
     <title>Tsoft2 - Tool tạo prompt video veo3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Tailwind giống bản gốc -->
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-
     <script>
       tailwind.config = {
         theme: {
@@ -21,6 +21,7 @@
       };
     </script>
 
+    <!-- Import map cho React + GenAI giống bản gốc -->
     <script type="importmap">
     {
       "imports": {
@@ -32,24 +33,47 @@
     }
     </script>
 
-    <!-- TẮT HOÀN TOÀN POPUP -->
-    <style>
-      #info-popup, .popup, .popup-overlay {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
+    <!-- KILL POPUP "Thông Báo Quan Trọng" VĨNH VIỄN -->
+    <script>
+      // Hàm xoá mọi node có chữ "Thông Báo Quan Trọng"
+      function removeInfoPopup() {
+        const all = document.querySelectorAll("div, section, article");
+        all.forEach((el) => {
+          const text = el.textContent || "";
+          if (text.includes("Thông Báo Quan Trọng")) {
+            const root = el.closest("div");
+            if (root && root.parentElement) {
+              root.parentElement.removeChild(root);
+            }
+          }
+        });
       }
-    </style>
 
+      // Khi DOM sẵn sàng + sau đó mọi lần React render thêm, đều kill popup
+      window.addEventListener("DOMContentLoaded", () => {
+        removeInfoPopup();
+
+        const observer = new MutationObserver(() => {
+          removeInfoPopup();
+        });
+
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+        });
+      });
+    </script>
   </head>
 
   <body class="bg-dark-bg text-dark-text">
+    <!-- React sẽ render toàn bộ app vào đây -->
     <div id="root">
       <div class="min-h-screen flex items-center justify-center text-gray-400">
         Đang tải ứng dụng Tsoft2...
       </div>
     </div>
 
+    <!-- App React gốc của bạn, giữ nguyên -->
     <script type="module" crossorigin src="./index-Dg0lys3F.js"></script>
   </body>
 </html>
