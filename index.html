@@ -1,160 +1,199 @@
-/* Reset cơ bản */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tsoft2 - Tool tạo prompt video veo3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://tsoft2.vercel.app/vite.svg"
+    />
 
-body {
-  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
-    sans-serif;
-  background-color: #f3f6fb;
-  color: #1f2933;
-}
+    <!-- Tailwind CDN giống trang gốc -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 
-/* HEADER */
-.topbar {
-  height: 64px;
-  background: #0d6efd;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "brand-purple": "#6d28d9",
+              "brand-light-purple": "#8b5cf6",
+              "dark-bg": "#111827",
+              "dark-card": "#1f2937",
+              "dark-border": "#374151",
+              "dark-text": "#d1d5db",
+              "dark-text-secondary": "#9ca3af",
+            },
+          },
+        },
+      };
+    </script>
 
-.topbar-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    <!-- Các animation CSS y chang file gốc -->
+    <style>
+      @keyframes gradient-animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .animated-gradient-text {
+        background-size: 200% 200%;
+        animation: gradient-animation 5s ease infinite;
+      }
 
-.logo-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #fff;
-  color: #0d6efd;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-}
+      .typing-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 0;
+      }
+      .typing-indicator span {
+        height: 8px;
+        width: 8px;
+        margin: 0 2px;
+        background-color: #9ca3af;
+        display: block;
+        border-radius: 50%;
+        opacity: 0.4;
+        animation: typing-animation 1s infinite ease-in-out;
+      }
+      .typing-indicator span:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+      .typing-indicator span:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      @keyframes typing-animation {
+        0% {
+          opacity: 0.4;
+          transform: translateY(0);
+        }
+        25% {
+          opacity: 1;
+          transform: translateY(-3px);
+        }
+        50% {
+          opacity: 0.4;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0.4;
+          transform: translateY(0);
+        }
+      }
 
-.logo-text {
-  font-size: 18px;
-  font-weight: 600;
-}
+      @keyframes pulse-animation {
+        0% {
+          box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(139, 92, 246, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+        }
+      }
+      .chatbot-pulse {
+        animation: pulse-animation 2s infinite;
+      }
 
-.topbar-nav {
-  display: flex;
-  gap: 18px;
-}
+      /* VIP Card Glow */
+      @keyframes vip-glow-spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .vip-card-container {
+        position: relative;
+        padding: 2px;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .vip-card-container::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(
+          transparent,
+          #a855f7,
+          #ec4899,
+          transparent 30%
+        );
+        animation: vip-glow-spin 4s linear infinite;
+        z-index: -1;
+      }
 
-.topbar-nav a {
-  color: #e5f0ff;
-  font-size: 14px;
-  text-decoration: none;
-}
+      /* Chatbot */
+      @keyframes fade-in-up {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fade-in-up 0.4s ease-out forwards;
+      }
 
-.topbar-nav a:hover {
-  color: #ffffff;
-}
+      @keyframes avatar-glow {
+        0% {
+          box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 0 6px rgba(167, 139, 250, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(167, 139, 250, 0);
+        }
+      }
+      .avatar-glowing {
+        animation: avatar-glow 1.5s infinite;
+      }
+    </style>
 
-/* PHẦN CHÍNH – căn giữa theo chiều dọc, vừa màn hình */
-.page {
-  min-height: calc(100vh - 64px - 60px); /* trừ header + footer */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 30px 16px;
-}
+    <!-- Importmap cho React + Google GenAI (giống app cũ) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react/": "https://aistudiocdn.com/react@^19.1.1/",
+          "react": "https://aistudiocdn.com/react@^19.1.1",
+          "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+          "@google/genai": "https://aistudiocdn.com/@google/genai@^1.17.0"
+        }
+      }
+    </script>
+  </head>
 
-.container {
-  max-width: 1100px;
-  width: 100%;
-  margin: 0 auto;
-}
+  <body class="bg-dark-bg text-dark-text">
+    <!-- React sẽ render toàn bộ UI vào đây -->
+    <div id="root">
+      <div class="min-h-screen flex items-center justify-center">
+        <p class="text-dark-text-secondary">Đang tải ứng dụng Tsoft 2...</p>
+      </div>
+    </div>
 
-/* TIÊU ĐỀ */
-.page-title {
-  text-align: center;
-  font-size: 28px;
-  font-weight: 700;
-  color: #0d6efd;
-  margin-bottom: 8px;
-}
-
-.page-subtitle {
-  text-align: center;
-  font-size: 14px;
-  color: #5b6c8a;
-  margin-bottom: 28px;
-}
-
-/* GRID CARD */
-.card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.tool-card {
-  background: #ffffff;
-  border-radius: 14px;
-  padding: 24px 20px 22px;
-  width: 320px;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
-  text-align: center;
-}
-
-.tool-icon {
-  font-size: 40px;
-  margin-bottom: 16px;
-}
-
-.tool-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #0d6efd;
-  margin-bottom: 10px;
-}
-
-.tool-desc {
-  font-size: 14px;
-  color: #4b5563;
-  margin-bottom: 18px;
-}
-
-/* NÚT */
-.btn-primary {
-  border: none;
-  outline: none;
-  padding: 10px 24px;
-  border-radius: 999px;
-  background: #0d6efd;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s ease, transform 0.1s ease;
-}
-
-.btn-primary:hover {
-  background: #0b5ed7;
-  transform: translateY(-1px);
-}
-
-/* FOOTER */
-.footer {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  color: #8a9bb5;
-}
+    <!-- Bundle React gốc (bạn đã upload index-Dg0lys3F.js vào repo) -->
+    <script type="module" src="./index-Dg0lys3F.js"></script>
+  </body>
+</html>
