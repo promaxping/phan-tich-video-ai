@@ -1,65 +1,109 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tsoft 2 - Bộ Công Cụ Video AI</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tsoft MMO Tools - Phân tích Video AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="./style.css">
-</head>
+    <!-- CSS giao diện landing bạn gửi -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<body>
-
-    <!-- HEADER -->
-    <header>
-        <div class="logo">
-            <img src="https://cdn-icons-png.flaticon.com/512/9068/9068699.png" width="28">
-            Tsoft Tools
-        </div>
-        <nav>
-            <a href="#">Trang chủ</a>
-            <a href="#">Thư viện</a>
-            <a href="#">Thiết lập API</a>
+  <body>
+    <!-- ==== LANDING PAGE (màn hình bạn ưng) ==== -->
+    <div id="landing">
+      <header class="header">
+        <div class="logo">Tsoft MMO Tools</div>
+        <nav class="nav">
+          <a href="#">Trang chủ</a>
+          <a href="#">Tài liệu</a>
+          <a href="#">Cộng đồng</a>
         </nav>
-    </header>
+      </header>
 
-    <!-- MAIN -->
-    <div class="container">
+      <main class="container">
+        <section class="hero">
+          <h1 class="hero-title">Bộ Công Cụ Tsoft MMO Tools</h1>
+          <p class="hero-sub">
+            Tập trung vào các tool AI cho MMO, Youtube, TikTok, phân tích video,
+            viết kịch bản và tối ưu nội dung.
+          </p>
+        </section>
 
-        <h1 class="page-title">Tsoft 2 - Bộ Công Cụ Video AI</h1>
-        <div class="page-sub">Bộ công cụ AI hỗ trợ tạo hình – prompt – thumbnail</div>
+        <section class="tools">
+          <div class="tools-header">
+            <h2 class="tools-title">Các công cụ nổi bật</h2>
+            <p class="tools-sub">
+              Chọn một công cụ để bắt đầu trải nghiệm. Tsoft sẽ hỗ trợ bạn tối ưu
+              từng bước trong quy trình làm nội dung.
+            </p>
+          </div>
 
-        <div class="grid-cards">
-
-            <!-- CARD 1 -->
+          <div class="grid-cards">
+            <!-- Card 1 -->
             <div class="card">
-                <img class="card-icon" src="https://cdn-icons-png.flaticon.com/512/1829/1829580.png">
-                <div class="card-title">Tạo hình ảnh theo kịch bản</div>
-                <div class="card-desc">Tải lên kịch bản để AI phân cảnh và sinh prompt + hình minh họa.</div>
-                <button class="card-button">Bắt đầu</button>
+              <div class="card-title">Phân tích Video bằng AI</div>
+              <div class="card-desc">
+                Tải video và để AI tự động phân tích phân cảnh, trích timeline,
+                giúp bạn viết lại kịch bản hoặc làm lại video.
+              </div>
+              <button id="btn-video-ai" class="card-button">
+                Mở Tsoft MMO Tools
+              </button>
             </div>
 
-            <!-- CARD 2 -->
+            <!-- Card 2 -->
             <div class="card">
-                <img class="card-icon" src="https://cdn-icons-png.flaticon.com/512/819/819814.png">
-                <div class="card-title">Tạo prompt Veo3 hàng loạt</div>
-                <div class="card-desc">AI xác định nhân vật, phong cách và sinh prompt Veo3 tự động.</div>
-                <button class="card-button">Bắt đầu</button>
+              <div class="card-title">Tạo Prompt Veo3 / Storyboard</div>
+              <div class="card-desc">
+                Tự động tạo prompt chi tiết cho Veo3 bám sát storyboard, giúp giữ
+                nhân vật và bối cảnh đồng nhất.
+              </div>
+              <button class="card-button" type="button">
+                Sắp ra mắt
+              </button>
             </div>
 
-            <!-- CARD 3 -->
+            <!-- Card 3 -->
             <div class="card">
-                <img class="card-icon" src="https://cdn-icons-png.flaticon.com/512/747/747676.png">
-                <div class="card-title">Tạo Thumbnail theo ảnh mẫu</div>
-                <div class="card-desc">AI phân tích thumbnail mẫu và tạo prompt để làm ảnh tương tự.</div>
-                <button class="card-button">Bắt đầu</button>
+              <div class="card-title">Tối ưu kịch bản & tiêu đề</div>
+              <div class="card-desc">
+                Gợi ý tiêu đề, mô tả, kịch bản chuẩn SEO cho YouTube, TikTok,
+                tránh trùng lặp nội dung & Reuse Content.
+              </div>
+              <button class="card-button" type="button">
+                Sắp ra mắt
+              </button>
             </div>
+          </div>
+        </section>
+      </main>
 
-        </div>
-
+      <footer class="footer">
+        © 2025 Tsoft MMO Tools – Phát triển bởi Arsène Lupin.
+      </footer>
     </div>
 
-    <footer>© 2025 Tsoft 2 - All rights reserved</footer>
+    <!-- ==== APP REACT GỐC (MMO Tools full) – ẨN LÚC ĐẦU ==== -->
+    <div id="root" style="display: none;"></div>
 
-</body>
+    <!-- Bundle React đã build sẵn (GIỮ NGUYÊN TÊN FILE) -->
+    <script type="module" src="./index-Dg0lys3F.js"></script>
+
+    <!-- Script nhỏ để chuyển từ landing sang app React -->
+    <script>
+      const btnVideoAi = document.getElementById("btn-video-ai");
+      const landing = document.getElementById("landing");
+      const root = document.getElementById("root");
+
+      if (btnVideoAi && landing && root) {
+        btnVideoAi.addEventListener("click", () => {
+          // Ẩn landing, hiện app React
+          landing.style.display = "none";
+          root.style.display = "block";
+          window.scrollTo(0, 0);
+        });
+      }
+    </script>
+  </body>
 </html>
