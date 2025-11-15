@@ -2,108 +2,100 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <title>Tsoft MMO Tools - Phân tích Video AI</title>
+    <title>Tsoft 2 - Bộ Công Cụ Video AI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- CSS giao diện landing bạn gửi -->
+    <!-- Importmap cho app React cũ (như bản đầu của anh) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react/": "https://aistudiocdn.com/react@^19.1.1/",
+          "react": "https://aistudiocdn.com/react@^19.1.1",
+          "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+          "@google/genai": "https://aistudiocdn.com/@google/genai@^1.17.0"
+        }
+      }
+    </script>
+
+    <!-- CSS giao diện sáng kiểu MMO Tools -->
     <link rel="stylesheet" href="./style.css" />
   </head>
 
-  <body>
-    <!-- ==== LANDING PAGE (màn hình bạn ưng) ==== -->
-    <div id="landing">
-      <header class="header">
-        <div class="logo">Tsoft MMO Tools</div>
-        <nav class="nav">
-          <a href="#">Trang chủ</a>
-          <a href="#">Tài liệu</a>
-          <a href="#">Cộng đồng</a>
-        </nav>
-      </header>
+  <!-- class="landing" để mình giữ nền sáng, tránh React đổi màu body -->
+  <body class="landing">
+    <!-- ===== LANDING (giao diện anh đang ưng) ===== -->
+    <header class="header">
+      <div class="logo">Tsoft Tools</div>
+      <nav class="nav">
+        <a href="#">Trang chủ</a>
+        <a href="#app-section">Công cụ</a>
+        <a href="#">Thiết lập API</a>
+      </nav>
+    </header>
 
-      <main class="container">
-        <section class="hero">
-          <h1 class="hero-title">Bộ Công Cụ Tsoft MMO Tools</h1>
-          <p class="hero-sub">
-            Tập trung vào các tool AI cho MMO, Youtube, TikTok, phân tích video,
-            viết kịch bản và tối ưu nội dung.
+    <main class="container">
+      <section class="hero">
+        <h1 class="hero-title">Tsoft 2 - Bộ Công Cụ Video AI</h1>
+        <p class="hero-sub">
+          Bộ công cụ AI hỗ trợ tạo hình – prompt – thumbnail cho MMO, YouTube, TikTok.
+        </p>
+      </section>
+
+      <section class="tools">
+        <div class="tools-header">
+          <h2 class="tools-title">Các công cụ nổi bật</h2>
+          <p class="tools-sub">
+            Chọn một công cụ để bắt đầu. Phía dưới là toàn bộ app Tsoft MMO Tools cũ của anh.
           </p>
-        </section>
+        </div>
 
-        <section class="tools">
-          <div class="tools-header">
-            <h2 class="tools-title">Các công cụ nổi bật</h2>
-            <p class="tools-sub">
-              Chọn một công cụ để bắt đầu trải nghiệm. Tsoft sẽ hỗ trợ bạn tối ưu
-              từng bước trong quy trình làm nội dung.
-            </p>
+        <div class="grid-cards">
+          <!-- Card 1 -->
+          <div class="card">
+            <div class="card-title">Tạo hình ảnh theo kịch bản</div>
+            <div class="card-desc">
+              Tải lên kịch bản để AI phân cảnh và sinh prompt + hình minh hoạ.
+            </div>
+            <a href="#app-section" class="card-button">Bắt đầu</a>
           </div>
 
-          <div class="grid-cards">
-            <!-- Card 1 -->
-            <div class="card">
-              <div class="card-title">Phân tích Video bằng AI</div>
-              <div class="card-desc">
-                Tải video và để AI tự động phân tích phân cảnh, trích timeline,
-                giúp bạn viết lại kịch bản hoặc làm lại video.
-              </div>
-              <button id="btn-video-ai" class="card-button">
-                Mở Tsoft MMO Tools
-              </button>
+          <!-- Card 2 -->
+          <div class="card">
+            <div class="card-title">Tạo prompt Veo3 hàng loạt</div>
+            <div class="card-desc">
+              AI xác định nhân vật, phong cách và sinh prompt Veo3 tự động bám theo storyboard.
             </div>
-
-            <!-- Card 2 -->
-            <div class="card">
-              <div class="card-title">Tạo Prompt Veo3 / Storyboard</div>
-              <div class="card-desc">
-                Tự động tạo prompt chi tiết cho Veo3 bám sát storyboard, giúp giữ
-                nhân vật và bối cảnh đồng nhất.
-              </div>
-              <button class="card-button" type="button">
-                Sắp ra mắt
-              </button>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="card">
-              <div class="card-title">Tối ưu kịch bản & tiêu đề</div>
-              <div class="card-desc">
-                Gợi ý tiêu đề, mô tả, kịch bản chuẩn SEO cho YouTube, TikTok,
-                tránh trùng lặp nội dung & Reuse Content.
-              </div>
-              <button class="card-button" type="button">
-                Sắp ra mắt
-              </button>
-            </div>
+            <a href="#app-section" class="card-button">Bắt đầu</a>
           </div>
-        </section>
-      </main>
 
-      <footer class="footer">
-        © 2025 Tsoft MMO Tools – Phát triển bởi Arsène Lupin.
-      </footer>
-    </div>
+          <!-- Card 3 -->
+          <div class="card">
+            <div class="card-title">Tạo Thumbnail theo ảnh mẫu</div>
+            <div class="card-desc">
+              Phân tích thumbnail mẫu và tạo prompt để anh có thể tạo các ảnh tương tự.
+            </div>
+            <a href="#app-section" class="card-button">Bắt đầu</a>
+          </div>
+        </div>
+      </section>
+    </main>
 
-    <!-- ==== APP REACT GỐC (MMO Tools full) – ẨN LÚC ĐẦU ==== -->
-    <div id="root" style="display: none;"></div>
+    <footer class="footer">
+      © 2025 Tsoft 2 - All rights reserved.
+    </footer>
 
-    <!-- Bundle React đã build sẵn (GIỮ NGUYÊN TÊN FILE) -->
+    <!-- ===== APP REACT CŨ CHẠY BÊN DƯỚI ===== -->
+    <section id="app-section" class="app-section">
+      <div class="container">
+        <h2 class="tools-title" style="margin-top:40px; margin-bottom:20px;">
+          Tsoft MMO Tools (phiên bản đầy đủ)
+        </h2>
+        <!-- React sẽ mount toàn bộ app cũ vào đây -->
+        <div id="root"></div>
+      </div>
+    </section>
+
+    <!-- Bundle React cũ - GIỮ NGUYÊN -->
     <script type="module" src="./index-Dg0lys3F.js"></script>
-
-    <!-- Script nhỏ để chuyển từ landing sang app React -->
-    <script>
-      const btnVideoAi = document.getElementById("btn-video-ai");
-      const landing = document.getElementById("landing");
-      const root = document.getElementById("root");
-
-      if (btnVideoAi && landing && root) {
-        btnVideoAi.addEventListener("click", () => {
-          // Ẩn landing, hiện app React
-          landing.style.display = "none";
-          root.style.display = "block";
-          window.scrollTo(0, 0);
-        });
-      }
-    </script>
   </body>
 </html>
