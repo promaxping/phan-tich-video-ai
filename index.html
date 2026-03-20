@@ -1,16 +1,144 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>NGOC.PRO</title>
+<meta charset="UTF-8">
+<title>NGOC.PRO</title>
 
-  <link rel="stylesheet" href="./style.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #fff;
+}
+
+.container {
+    max-width: 600px;
+    margin: 80px auto;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.notice {
+    background: rgba(255, 204, 0, 0.1);
+    border-left: 4px solid #facc15;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.notice h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.footer {
+    margin-top: 25px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+ol {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.success {
+    margin-top: 15px;
+    color: #4ade80;
+    display: none;
+    text-align: center;
+}
+</style>
+
 </head>
 <body>
 
-<div id="root"></div>
+<div class="container">
 
-<script type="module" src="./index-Dg0lys3F.js"></script>
+<div class="notice">
+<h2>⚠️ Thông Báo Quan Trọng</h2>
+<p>NgocPro là công cụ clone từ Tsoft.</p>
+<p>Liên hệ: <b>Anh Ngọc</b> - 035 2332 234</p>
+</div>
+
+<h1>Thiết Lập API Key</h1>
+
+<p>Nhập API Gemini để sử dụng tool</p>
+
+<input id="apikey" placeholder="Dán API Key vào đây...">
+
+<button onclick="saveKey()">Lưu & Tiếp tục</button>
+
+<div class="success" id="success">✅ Đã lưu thành công!</div>
+
+<div class="footer">
+<h3>Hướng dẫn</h3>
+<ol>
+<li>Vào Google AI Studio</li>
+<li>Đăng nhập</li>
+<li>Tạo API Key</li>
+<li>Dán vào ô trên</li>
+</ol>
+</div>
+
+</div>
+
+<script>
+function saveKey() {
+    const key = document.getElementById("apikey").value;
+
+    if (!key) {
+        alert("Nhập API Key đi bro!");
+        return;
+    }
+
+    localStorage.setItem("gemini_key", key);
+
+    document.getElementById("success").style.display = "block";
+}
+</script>
 
 </body>
 </html>
