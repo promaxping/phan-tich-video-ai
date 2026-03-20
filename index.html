@@ -5,7 +5,7 @@
     <title>NGOC.PRO - Tool tạo prompt video Veo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Chặn popup React cũ -->
+    <!-- Kill popup vàng cũ -->
     <style>
       .fixed.inset-0.bg-black.bg-opacity-90.z-\[9999\] {
         display: none !important;
@@ -13,13 +13,10 @@
     </style>
 
     <!-- Google Adsense -->
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4647976077243801"
-      crossorigin="anonymous"
-    ></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4647976077243801"
+      crossorigin="anonymous"></script>
 
-    <!-- Polyfill Copy -->
+    <!-- Polyfill copy -->
     <script>
       (function () {
         function fallbackCopyTextToClipboard(text) {
@@ -83,6 +80,122 @@
       </div>
     </div>
 
+    <!-- Popup Tâm sự cùng Ngọc -->
+    <div id="admin-popup"
+      class="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center p-4 hidden">
+      <div
+        class="bg-[#111827] border-2 border-brand-purple rounded-2xl shadow-[0_0_30px_rgba(109,40,217,0.6)] max-w-lg w-full p-8 relative text-center overflow-hidden">
+
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-pulse"></div>
+
+        <div class="mb-6">
+          <div class="mx-auto w-16 h-16 bg-brand-purple/20 rounded-full flex items-center justify-center mb-4 animate-bounce">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-brand-light-purple" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-2">
+            TÂM SỰ CÙNG NGỌC
+          </h2>
+          <p id="admin-popup-quote"
+            class="text-gray-300 italic text-sm mb-6 border-b border-gray-700 pb-4">
+            "Loading..."
+          </p>
+        </div>
+
+        <div class="space-y-4 text-left bg-gray-900/50 p-5 rounded-xl border border-gray-700">
+          <p class="text-white leading-relaxed">
+            ❤️ Website này được phát triển bởi Admin
+            <a href="https://zalo.me/0352332234" target="_blank" class="font-bold text-cyan-400 hover:text-cyan-300">XNXX</a>.
+          </p>
+
+          <p class="text-gray-300 leading-relaxed">
+            Mong muốn lớn nhất của mình là giúp anh em làm video nhanh hơn và tiết kiệm thời gian sáng tạo.
+          </p>
+
+          <div class="bg-brand-purple/10 border-l-4 border-brand-purple p-3 mt-2">
+            <p class="text-sm text-gray-300">
+              🚀 Nếu thấy hữu ích, hãy ủng hộ tại
+              <a href="https://ngoc.pro/cafe" class="text-yellow-300 hover:underline">ngoc.pro/cafe</a>
+              hoặc tài khoản Veo3 nhé!
+            </p>
+          </div>
+
+          <div class="pt-4">
+            <a href="https://zalo.me/g/xqfalj355" target="_blank"
+              class="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:scale-105 transition-all">
+              Tham gia Group hỗ trợ Youtube
+            </a>
+          </div>
+        </div>
+
+        <button id="admin-popup-close" disabled
+          class="mt-6 w-full py-3 rounded-lg font-bold transition-all bg-gray-800 text-gray-500 cursor-not-allowed">
+          Vui lòng đợi giây lát (<span id="admin-popup-countdown">10</span>s)
+        </button>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const quotes = [
+          "Hế lô người anh em thiện lành!",
+          "Đang hăng say sáng tạo à?",
+          "Nhấp miếng nước rồi tiếp tục nhé!",
+          "Thời gian là vàng, giữ sức khỏe nha!",
+          "Admin chúc bạn triệu view!",
+          "Alo alo, Admin XNXX gửi lời chúc!",
+        ];
+
+        const popup = document.getElementById("admin-popup");
+        const quoteEl = document.getElementById("admin-popup-quote");
+        const closeBtn = document.getElementById("admin-popup-close");
+        const countdownEl = document.getElementById("admin-popup-countdown");
+
+        let countdown = 10;
+        let timer = null;
+
+        function showPopup() {
+          if (sessionStorage.getItem("adminPopupSeen")) return;
+
+          quoteEl.textContent = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
+
+          popup.classList.remove("hidden");
+          popup.classList.add("flex");
+
+          countdownEl.textContent = countdown;
+          closeBtn.disabled = true;
+
+          timer = setInterval(() => {
+            countdown--;
+            countdownEl.textContent = countdown;
+
+            if (countdown <= 0) {
+              clearInterval(timer);
+              closeBtn.disabled = false;
+              closeBtn.textContent = "Đã hiểu, cảm ơn ❤️";
+              closeBtn.className =
+                "mt-6 w-full py-3 rounded-lg bg-gray-700 hover:bg-gray-600 text-white font-bold cursor-pointer";
+            }
+          }, 1000);
+        }
+
+        function hidePopup() {
+          popup.classList.add("hidden");
+          sessionStorage.setItem("adminPopupSeen", "true");
+        }
+
+        closeBtn.onclick = () => {
+          if (!closeBtn.disabled) hidePopup();
+        };
+
+        window.onload = () => setTimeout(showPopup, 500);
+      })();
+    </script>
+
+    <!-- React App -->
     <script type="module" crossorigin src="./index-Dg0lys3F.js"></script>
   </body>
 </html>
