@@ -1,16 +1,88 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <title>Run App</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>NGOC.PRO - Tool tạo prompt video Veo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<div id="root"></div>
+    <!-- Chặn popup React cũ -->
+    <style>
+      .fixed.inset-0.bg-black.bg-opacity-90.z-\[9999\] {
+        display: none !important;
+      }
+    </style>
 
-<script type="module">
-import "./index-Dg0lys3F.js";
-</script>
+    <!-- Google Adsense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4647976077243801"
+      crossorigin="anonymous"
+    ></script>
 
-</body>
+    <!-- Polyfill Copy -->
+    <script>
+      (function () {
+        function fallbackCopyTextToClipboard(text) {
+          try {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.top = "-1000px";
+            textArea.style.left = "-1000px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            return Promise.resolve();
+          } catch (err) {
+            return Promise.reject(err);
+          }
+        }
+        try {
+          if (!navigator.clipboard || !navigator.clipboard.writeText) {
+            navigator.clipboard = { writeText: fallbackCopyTextToClipboard };
+          } else {
+            const originalWriteText =
+              navigator.clipboard.writeText.bind(navigator.clipboard);
+            navigator.clipboard.writeText = function (text) {
+              return originalWriteText(text).catch(function () {
+                return fallbackCopyTextToClipboard(text);
+              });
+            };
+          }
+        } catch (e) {
+          navigator.clipboard = { writeText: fallbackCopyTextToClipboard };
+        }
+      })();
+    </script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "brand-purple": "#6d28d9",
+              "dark-bg": "#111827",
+              "dark-text": "#d1d5db",
+              "brand-light-purple": "#a855f7",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body class="bg-dark-bg text-dark-text">
+    <div id="root">
+      <div class="min-h-screen flex items-center justify-center text-gray-400">
+        Đang tải ứng dụng NGOC.PRO .
+      </div>
+    </div>
+
+    <script type="module" crossorigin src="./index-Dg0lys3F.js"></script>
+  </body>
 </html>
