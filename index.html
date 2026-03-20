@@ -1,123 +1,15 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>NGOC.PRO</title>
-
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f6fa;
-    margin: 0;
-}
-
-/* POPUP */
-.popup {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: white;
-    border-radius: 8px;
-    padding: 15px;
-    width: 320px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.popup button {
-    float: right;
-    border: none;
-    background: #eee;
-    cursor: pointer;
-}
-
-/* MAIN */
-.container {
-    max-width: 700px;
-    margin: 80px auto;
-    background: white;
-    padding: 25px;
-    border-radius: 8px;
-}
-
-h1 {
-    margin-top: 0;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-}
-
-.btn {
-    margin-top: 10px;
-    padding: 10px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.link {
-    color: blue;
-}
-</style>
-
+  <meta charset="UTF-8">
+  <title>Run App</title>
 </head>
-
 <body>
 
-<!-- POPUP -->
-<div class="popup" id="popup">
-    <button onclick="closePopup()">✖</button>
-    <h3>Thông Báo Quan Trọng</h3>
-    <p>NgocPro là trang web clone và sử dụng lại từ Tsoft.</p>
-    <p>Liên hệ Admin:</p>
-    <p>Zalo: <span class="link">Anh Ngọc</span> - 035 2332 234</p>
-</div>
+<div id="root"></div>
 
-<!-- MAIN -->
-<div class="container">
-
-<h1>Thiết Lập API Key</h1>
-
-<p>Bạn cần cung cấp API Key Gemini để sử dụng các tính năng của công cụ.</p>
-
-<label>Gemini API Key</label>
-<input id="key" placeholder="Dán API Key của bạn vào đây">
-
-<button class="btn" onclick="save()">Lưu và Tiếp Tục</button>
-
-<h2>Hướng dẫn lấy API Key</h2>
-
-<ol>
-<li>Truy cập Google AI Studio</li>
-<li>Đăng nhập</li>
-<li>Nhấn "Create API key"</li>
-<li>Dán vào ô trên</li>
-</ol>
-
-<p style="font-size:13px;color:gray;">
-API Key được lưu cục bộ và không gửi đi đâu.
-</p>
-
-</div>
-
-<script>
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
-
-function save() {
-    let key = document.getElementById("key").value;
-    if (!key) {
-        alert("Nhập API key!");
-        return;
-    }
-
-    localStorage.setItem("api_key", key);
-    alert("Đã lưu!");
-}
+<script type="module">
+import "./index-Dg0lys3F.js";
 </script>
 
 </body>
