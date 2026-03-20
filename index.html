@@ -1,5 +1,19 @@
-<meta http-equiv="refresh" content="0; url=https://ngoc.pro" />
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hiển thị index-Dg0lys3F.js</title>
+</head>
+<body>
+
+<pre id="code"></pre>
 
 <script>
-  window.location.href = "https://ngoc.pro";
+fetch('index.js')
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById('code').textContent = data;
+  });
 </script>
+
+</body>
+</html>
